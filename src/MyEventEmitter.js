@@ -66,9 +66,11 @@ class MyEventEmitter {
     return wrapper;
   }
   removeAllListeners(name, callback) {
-    this.listeners[name] = [];
-
-    return callback;
+    if (name) {
+      delete this.listeners[name];
+    } else {
+      this.listeners = {};
+    }
   }
   listenerCount(name) {
     return this.listeners[name]?.length || 0;
